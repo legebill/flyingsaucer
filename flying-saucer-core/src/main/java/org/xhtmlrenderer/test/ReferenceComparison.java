@@ -1,5 +1,7 @@
 package org.xhtmlrenderer.test;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xhtmlrenderer.layout.LayoutContext;
 import org.xhtmlrenderer.render.Box;
 import org.xhtmlrenderer.swing.BoxRenderer;
@@ -16,6 +18,9 @@ import java.util.Map;
  * ReferenceComparison runs a comparison of rendering a set of source XHTML files against a 
  */
 public class ReferenceComparison {
+
+    private static final Logger log = LoggerFactory.getLogger(ReferenceComparison.class);
+
     private int width;
     private boolean isVerbose;
     private static final String LINE_SEPARATOR = "\n";
@@ -245,7 +250,7 @@ public class ReferenceComparison {
 
     private void log(final String msg) {
         if (verbose()) {
-            System.out.println(msg);
+            log.info(msg);
         }
     }
 
@@ -299,10 +304,10 @@ public class ReferenceComparison {
 
                 if (result instanceof FailedResult) {
                     failed++;
-                    System.out.println(result.describe(file));
+                    log.info(result.describe(file));
                 }
             }
-            System.out.println("Checked " + files.keySet().size() + " files, " + (failed > 0 ? failed + " failed." : "all OK."));
+            log.info("Checked " + files.keySet().size() + " files, " + (failed > 0 ? failed + " failed." : "all OK."));
         }
 
         private static class RenderFailed implements Result {

@@ -21,6 +21,8 @@ package org.xhtmlrenderer.pdf;
 
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.pdf.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
 import org.xhtmlrenderer.css.parser.FSColor;
 import org.xhtmlrenderer.layout.LayoutContext;
@@ -32,8 +34,10 @@ import com.lowagie.text.Rectangle;
 
 import java.io.IOException;
 
-public class TextFormField extends AbstractFormField
-{
+public class TextFormField extends AbstractFormField {
+
+  private static final Logger log = LoggerFactory.getLogger(TextFormField.class);
+
   private static final String FIELD_TYPE = "Text";
 
   private static final int DEFAULT_SIZE = 15;
@@ -110,10 +114,10 @@ public class TextFormField extends AbstractFormField
       writer.addAnnotation(formField);
     } catch (IOException ioe)
     {
-      System.out.println(ioe);
+      log.warn(ioe.getMessage(), ioe);
     } catch (DocumentException de)
     {
-      System.out.println(de);
+      log.info(de.getMessage(), de);
     }
 
   }

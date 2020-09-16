@@ -2,6 +2,8 @@ package org.xhtmlrenderer.util;
 
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by IntelliJ IDEA.
@@ -11,10 +13,13 @@ import java.io.PrintWriter;
  * To change this template use File | Settings | File Templates.
  */
 public class GenerateBigFile {
+
+    private static final Logger log = LoggerFactory.getLogger(GenerateBigFile.class);
+
     public static void main(String[] args) {
         if (args.length < 1) {
-            System.out.println("Usage:");
-            System.out.println("GenerateBigFile output-file");
+            log.info("Usage:");
+            log.info("GenerateBigFile output-file");
             System.exit(1);
         }
         PrintWriter out = null;

@@ -24,7 +24,7 @@ import java.math.BigInteger;
  * for (int i = 0; i < indices.length; i++) {
  * permutation.append (elements[indices[i]]);
  * }
- * System.out.println (permutation.toString ());
+ * log.info (permutation.toString ());
  * }
  * </pre>
  * One caveat. Don't use this class on large sets. Recall that the number of permutations of a set containing n elements

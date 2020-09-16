@@ -26,8 +26,13 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MakeTokens {
+
+    private static final Logger log = LoggerFactory.getLogger(MakeTokens.class);
+
     private static final String EOL = System.getProperty("line.separator");
     private static final String INPUT = "C:/eclipseWorkspaceQT/xhtmlrenderer/src/java/org/xhtmlrenderer/css/parser/tokens.txt";
     
@@ -88,6 +93,6 @@ public class MakeTokens {
         
         buf.append(EOL);
         
-        System.out.println(buf.toString());
+        log.info(buf.toString());
     }
 }

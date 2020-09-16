@@ -19,6 +19,8 @@
  */
 package org.xhtmlrenderer.swing;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xhtmlrenderer.extend.TextRenderer;
 import org.xhtmlrenderer.simple.XHTMLPanel;
 import org.xhtmlrenderer.util.Uu;
@@ -38,6 +40,8 @@ import java.net.URL;
  * @author empty
  */
 public class HTMLTest extends JFrame {
+
+    private static final Logger log = LoggerFactory.getLogger(HTMLTest.class);
     private static final long serialVersionUID = 1L;
 
     /**
@@ -409,7 +413,7 @@ public class HTMLTest extends JFrame {
          */
         public void actionPerformed(ActionEvent evt) {
             // TODO
-            System.out.println("Refresh Page triggered");
+            log.info("Refresh Page triggered");
         }
     }
 
@@ -439,7 +443,7 @@ public class HTMLTest extends JFrame {
          */
         public void actionPerformed(ActionEvent evt) {
             // TODO
-            System.out.println("Reload Page triggered");
+            log.info("Reload Page triggered");
         }
     }
 }

@@ -19,6 +19,8 @@
  */
 package org.xhtmlrenderer.test;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
 import org.xhtmlrenderer.extend.ReplacedElement;
 import org.xhtmlrenderer.extend.ReplacedElementFactory;
@@ -33,6 +35,8 @@ import org.xhtmlrenderer.simple.extend.FormSubmissionListener;
  * @author patrick
  */
 public class DelegatingReplacedElementFactory implements ReplacedElementFactory {
+
+    private static final Logger log = LoggerFactory.getLogger(DelegatingReplacedElementFactory.class);
     private final List replacers;
     private final Map byNameReplacers;
     private final List elementReplacements;
@@ -69,7 +73,7 @@ public class DelegatingReplacedElementFactory implements ReplacedElementFactory 
     }
 
     public void reset() {
-        System.out.println("\n\n***Factory reset()");
+        log.info("\n\n***Factory reset()");
         elementReplacements.clear();
         for (Iterator iterator = replacers.iterator(); iterator.hasNext();) {
             ElementReplacer elementReplacer = (ElementReplacer) iterator.next();

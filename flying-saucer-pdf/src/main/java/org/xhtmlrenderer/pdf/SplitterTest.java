@@ -23,6 +23,8 @@ import java.util.Iterator;
 
 import javax.xml.parsers.SAXParserFactory;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
@@ -30,6 +32,9 @@ import org.xml.sax.SAXParseException;
 import org.xml.sax.XMLReader;
 
 public class SplitterTest {
+
+    private static final Logger log = LoggerFactory.getLogger(SplitterTest.class);
+
     public static void main(String[] args) throws Exception {
         SAXParserFactory factory = SAXParserFactory.newInstance();
         factory.setNamespaceAware(true);
@@ -58,7 +63,7 @@ public class SplitterTest {
         
         for (Iterator i = splitter.getDocuments().iterator(); i.hasNext(); ) {
             Document doc = (Document)i.next();
-            System.out.println(doc.getDocumentElement());
+            log.info("{}", doc.getDocumentElement());
         }
     }
 }

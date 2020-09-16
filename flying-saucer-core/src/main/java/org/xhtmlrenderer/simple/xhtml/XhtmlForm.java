@@ -24,6 +24,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
 import org.xhtmlrenderer.simple.extend.URLUTF8Encoder;
 import org.xhtmlrenderer.simple.xhtml.controls.ButtonControl;
@@ -33,6 +35,8 @@ import org.xhtmlrenderer.simple.xhtml.controls.SelectControl;
 import org.xhtmlrenderer.simple.xhtml.controls.TextControl;
 
 public class XhtmlForm {
+
+    private static final Logger log = LoggerFactory.getLogger(XhtmlForm.class);
 
     protected String _action, _method;
 
@@ -152,10 +156,10 @@ public class XhtmlForm {
         }
 
         // TODO effectively submit form
-        System.out.println("Form submitted!");
-        System.out.println("Action: ".concat(_action));
-        System.out.println("Method: ".concat(_method));
-        System.out.println("Data: ".concat(data.toString()));
+        log.info("Form submitted!");
+        log.info("Action: ".concat(_action));
+        log.info("Method: ".concat(_method));
+        log.info("Data: ".concat(data.toString()));
 
         for (Iterator iter = _listeners.iterator(); iter.hasNext();) {
             ((FormListener) iter.next()).submitted(this);

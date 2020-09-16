@@ -20,6 +20,7 @@
  */
 package org.xhtmlrenderer.util;
 
+import org.slf4j.LoggerFactory;
 import org.xhtmlrenderer.DefaultCSSMarker;
 
 import java.io.*;
@@ -72,6 +73,9 @@ import java.net.MalformedURLException;
  * @author Patrick Wright
  */
 public class Configuration {
+
+    private static final org.slf4j.Logger log = LoggerFactory.getLogger(Configuration.class);
+
     /**
      * Our backing data store of properties.
      */
@@ -708,13 +712,13 @@ public class Configuration {
      */
     public static void main(String args[]) {
         try {
-            System.out.println("byte: " + String.valueOf(Configuration.valueAsByte("xr.test-config-byte", (byte) 15)));
-            System.out.println("short: " + String.valueOf(Configuration.valueAsShort("xr.test-config-short", (short) 20)));
-            System.out.println("int: " + String.valueOf(Configuration.valueAsInt("xr.test-config-int", 25)));
-            System.out.println("long: " + String.valueOf(Configuration.valueAsLong("xr.test-config-long", 30L)));
-            System.out.println("float: " + String.valueOf(Configuration.valueAsFloat("xr.test-config-float", 45.5F)));
-            System.out.println("double: " + String.valueOf(Configuration.valueAsDouble("xr.test-config-double", 50.75D)));
-            System.out.println("boolean: " + String.valueOf(Configuration.isTrue("xr.test-config-boolean", false)));
+            log.info("byte: " + String.valueOf(Configuration.valueAsByte("xr.test-config-byte", (byte) 15)));
+            log.info("short: " + String.valueOf(Configuration.valueAsShort("xr.test-config-short", (short) 20)));
+            log.info("int: " + String.valueOf(Configuration.valueAsInt("xr.test-config-int", 25)));
+            log.info("long: " + String.valueOf(Configuration.valueAsLong("xr.test-config-long", 30L)));
+            log.info("float: " + String.valueOf(Configuration.valueAsFloat("xr.test-config-float", 45.5F)));
+            log.info("double: " + String.valueOf(Configuration.valueAsDouble("xr.test-config-double", 50.75D)));
+            log.info("boolean: " + String.valueOf(Configuration.isTrue("xr.test-config-boolean", false)));
         } catch (Exception ex) {
             ex.printStackTrace();
         }

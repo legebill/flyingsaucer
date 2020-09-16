@@ -48,6 +48,8 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.regex.Pattern;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xhtmlrenderer.css.constants.CSSName;
@@ -102,6 +104,9 @@ import com.lowagie.text.pdf.PdfWriter;
  * projects/itext/</a> for license information.
  */
 public class ITextOutputDevice extends AbstractOutputDevice implements OutputDevice {
+
+    private static final Logger log = LoggerFactory.getLogger(ITextOutputDevice.class);
+
     private static final int FILL = 1;
     private static final int STROKE = 2;
     private static final int CLIP = 3;
@@ -646,7 +651,7 @@ public class ITextOutputDevice extends AbstractOutputDevice implements OutputDev
                 break;
 
             case PathIterator.SEG_QUADTO:
-            	System.out.println("Quad to " + coords[0] + " " + coords[1] + " " + coords[2] + " " + coords[3]);
+            	log.info("Quad to " + coords[0] + " " + coords[1] + " " + coords[2] + " " + coords[3]);
                 cb.curveTo(coords[0], coords[1], coords[2], coords[3]);
                 break;
             }

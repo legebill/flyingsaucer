@@ -25,13 +25,17 @@ import java.io.IOException;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Rectangle;
 import com.lowagie.text.pdf.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
 import org.xhtmlrenderer.layout.LayoutContext;
 import org.xhtmlrenderer.render.BlockBox;
 import org.xhtmlrenderer.render.RenderingContext;
 
-public class CheckboxFormField extends AbstractFormField
-{
+public class CheckboxFormField extends AbstractFormField {
+
+  private static final Logger log = LoggerFactory.getLogger(CheckboxFormField.class);
+
   private static final String FIELD_TYPE = "Checkbox";
 
   public CheckboxFormField(LayoutContext c, BlockBox box, int cssWidth, int cssHeight)
@@ -75,10 +79,10 @@ public class CheckboxFormField extends AbstractFormField
       writer.addAnnotation(formField);
     } catch (IOException ioe)
     {
-      System.out.println(ioe);
+      log.warn(ioe.getMessage(), ioe);
     } catch (DocumentException de)
     {
-      System.out.println(de);
+      log.warn(de.getMessage(), de);
     }
 
   }

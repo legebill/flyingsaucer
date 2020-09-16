@@ -56,7 +56,7 @@ public class BorderRadiusCorner {
 			}
 			//first = second = (LengthValue)value;
 		}
-			//System.out.println(fromVal + " " + _left + " " + _right);
+			//log.info(fromVal + " " + _left + " " + _right);
 			//this._right = this._left = ((PropertyValue)((ListValue)fromVal).getValues().get(0)).getFloatValue();
 		/*} else if(fromVal instanceof LengthValue) {
 			this._left = fromVal.asFloat();

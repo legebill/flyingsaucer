@@ -3,10 +3,14 @@ package org.xhtmlrenderer.test;
 import java.io.File;
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xhtmlrenderer.simple.Graphics2DRenderer;
 import org.xhtmlrenderer.util.Uu;
 
 public class SimplePageTest {
+
+    private static final Logger log = LoggerFactory.getLogger(SimplePageTest.class);
 
     public static void main(String[] args) throws Exception {
         long total = 0;
@@ -18,7 +22,7 @@ public class SimplePageTest {
         }
         //String page = demosDir + "/browser/xhtml/hamlet.xhtml";
         //String page = demosDir + "/splash/splash.html";
-        System.out.println("Testing with page " + page);
+        log.info("Testing with page " + page);
         for (int i = 0; i < cnt; i++) {
             Date start = new Date();
             Graphics2DRenderer.renderToImage(new File(page).toURL().toExternalForm(),
@@ -29,6 +33,6 @@ public class SimplePageTest {
             if (i > 4) total += diff;
         }
         long avg = total / cnt;
-        System.out.println("average : " + avg);
+        log.info("average : " + avg);
     }
 }

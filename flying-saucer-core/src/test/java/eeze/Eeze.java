@@ -32,6 +32,8 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xhtmlrenderer.simple.FSScrollPane;
 import org.xhtmlrenderer.simple.Graphics2DRenderer;
 import org.xhtmlrenderer.simple.XHTMLPanel;
@@ -45,6 +47,9 @@ import org.xhtmlrenderer.util.XRLog;
  * @author Who?
  */
 public class Eeze {
+
+    private static final Logger log = LoggerFactory.getLogger(Eeze.class);
+
     /**
      * Description of the Field
      */
@@ -372,7 +377,7 @@ public class Eeze {
                 .append(" order. The first is rendered. Use Alt-h to show keyboard navigation \n")
                 .append(" shortcuts.\n")
                 .append(" \n");
-        System.out.println(sb.toString());
+        log.info(sb.toString());
         System.exit(-1);
     }
 
@@ -671,7 +676,7 @@ public class Eeze {
             if (comparingWithImage) {
                 if (!imagePanel.imageWasLoaded()) {
                     comparingWithImage = false;
-                    System.out.println("   but have no image to load");
+                    log.info("   but have no image to load");
                     return;
                 }
                 if (split == null) split = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
