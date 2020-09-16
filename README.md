@@ -34,20 +34,13 @@ of these, along with the license they each have, is listed in the
 
 New releases of Flying Saucer are distributed through Maven.  The available artifacts are:
 
-* `org.xhtmlrenderer:flying-saucer-core` - Core library and Java2D rendering
-* `org.xhtmlrenderer:flying-saucer-pdf` - PDF output using iText 2.x
-* `org.xhtmlrenderer:flying-saucer-pdf-openpdf` - PDF output using OpenPDF
-* `org.xhtmlrenderer:flying-saucer-swt` - SWT output
-* `org.xhtmlrenderer:flying-saucer-log4j` - Logging plugin for log4j
+* `org.xhtmlrenderer:flying-saucer-pdf-openpdf` - Core library and Java2D rendering & PDF output using OpenPDF
 
 iText 2.x has unfixed security bugs. New projects should avoid it.
 
 ## GETTING STARTED
 
 There is a large amount of sample code under the `flying-saucer-examples` directory.
-
-`flying-saucer-core`, `flying-saucer-pdf`, and `flying-saucer-swt` must be on the
-build path, as well as the SWT JAR for your OS.
 
 `org.xhtmlrenderer.demo.browser.BrowserStartup` will start the browser demo.
 

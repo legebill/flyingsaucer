@@ -1,0 +1,26 @@
+plugins {
+    id "java"
+    id "maven"
+    id "maven-publish"
+
+    id("fr.brouillard.oss.gradle.jgitver")
+}
+
+task sourceJar(type: Jar) {
+    from sourceSets.main.allJava
+}
+apply from: "$rootDir/gradle/publishing.gradle"
+
+java {
+    sourceCompatibility = org.gradle.api.JavaVersion.VERSION_1_8
+    targetCompatibility = org.gradle.api.JavaVersion.VERSION_1_8
+}
+
+
+dependencies {
+    compile "com.github.librepdf:openpdf:1.3.11"
+    compile "org.slf4j:slf4j-api:1.7.30"
+
+    // test dependencies
+    testCompile 'junit:junit:4.12'
+}

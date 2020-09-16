@@ -1,0 +1,104 @@
+---
+kind: pipeline
+name: build
+
+steps:
+
+  - name: restore-cache
+    image: drillster/drone-volume-cache
+    settings:
+      restore: true
+      mount:
+        - .gcache/wrapper
+        - .gcache/caches
+      ttl: 21
+      cache_key: [ DRONE_REPO_OWNER, DRONE_REPO_NAME ]
+    volumes:
+      - name: host-cache
+        path: /cache
+
+  - name: fetch-tags
+    image: docker:git
+    commands:
+      - git fetch --tags
+    when:
+      branch:
+        include:
+          - master
+
+  - name: unit-test
+    image: openjdk:8-jdk
+    environment:
+      GRADLE_USER_HOME: .gcache
+      GRADLE_OPTS: -Dorg.gradle.daemon=false -Dorg.gradle.internal.launcher.welcomeMessageEnabled=false
+    commands:
+      - ./gradlew test check
+
+  - name: save-cache
+    image: drillster/drone-volume-cache
+    settings:
+      rebuild: true
+      mount:
+        - .gcache/wrapper
+        - .gcache/caches
+      cache_key: [ DRONE_REPO_OWNER, DRONE_REPO_NAME ]
+    volumes:
+      - name: host-cache
+        path: /cache
+
+  - name: publish-master-to-s3
+    image: openjdk:8-jdk
+    environment:
+      GRADLE_USER_HOME: .gcache
+      GRADLE_OPTS: -Dorg.gradle.daemon=false -Dorg.gradle.internal.launcher.welcomeMessageEnabled=false
+      AWS_ACCESS_KEY_ID:
+        from_secret: aws-publish-id
+      AWS_SECRET_ACCESS_KEY:
+        from_secret: aws-publish-secret
+    commands:
+      - ./gradlew compileJava publish --info
+    when:
+      branch:
+        include:
+          - master
+
+  - name: notify
+    environment:
+      EMAIL_USERNAME:
+        from_secret: postmark-ninja
+      EMAIL_PASSWORD:
+        from_secret: postmark-ninja
+    image: registry.dev.wisetime.com/drone-email
+    when:
+      status: failure
+
+volumes:
+  - name: host-cache
+    host:
+      # expects agent to have /tmp/cache directory created
+      path: /tmp/cache
+
+---
+kind: secret
+name: aws-publish-id
+get:
+  path: drone/publish/s3
+  name: aws-publish-id
+
+---
+kind: secret
+name: aws-publish-secret
+get:
+  path: drone/publish/s3
+  name: aws-publish-secret
+---
+kind: secret
+name: postmark-ninja
+get:
+  path: drone/notify/smtp
+  name: postmark-ninja
+
+
+# example run local
+#  mkdir -p /tmp/cache
+#  drone exec --trusted --exclude restore-cache --exclude save-cache --branch master

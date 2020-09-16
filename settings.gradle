@@ -1,0 +1,11 @@
+pluginManagement {
+
+    repositories {
+        gradlePluginPortal()
+        google()
+    }
+}
+
+rootProject.name = 'flying-saucer-parent'
+
+include 'flying-saucer-pdf'

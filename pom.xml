@@ -38,26 +38,8 @@
   </dependencyManagement>
 
   <modules>
-    <module>flying-saucer-core</module>
     <module>flying-saucer-pdf</module>
-<!--    <module>flying-saucer-pdf-osgi</module>-->
-<!--    <module>flying-saucer-swt</module>-->
-<!--    <module>flying-saucer-fop</module>-->
   </modules>
-
-  <scm>
-    <connection>scm:git:git://github.com/flyingsaucerproject/flyingsaucer.git</connection>
-    <developerConnection>scm:git:git@github.com:flyingsaucerproject/flyingsaucer.git</developerConnection>
-    <url>git://github.com/flyingsaucerproject/flyingsaucer.git</url>
-    <tag>HEAD</tag>
-  </scm>
-
-  <distributionManagement>
-    <repository>
-      <id>bintray</id>
-      <url>https://api.bintray.com/maven/flyingsaucerproject/maven/org.xhtmlrenderer:flying-saucer</url>
-    </repository>
-  </distributionManagement>
 
   <developers>
     <developer>
@@ -71,18 +53,6 @@
       <email>peter.brant@gmail.com</email>
     </developer>
   </developers>
-
-  <profiles>
-    <profile>
-      <id>doclint-java8-disable</id>
-      <activation>
-        <jdk>[1.8,)</jdk>
-      </activation>
-      <properties>
-        <javadoc.opts>-Xdoclint:none</javadoc.opts>
-      </properties>
-    </profile>
-  </profiles>
 
   <build>
     <plugins>
