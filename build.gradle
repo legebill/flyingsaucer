@@ -36,9 +36,7 @@ publishing {
 
     publications {
         mavenJava(MavenPublication) {
-            url = project.hasProperty('urlDest') ? project.getProperty('urlDest') : 'missing property'
             artifactId project.name
-
             // version is set via plugin
             from components.java
             artifact sourcesJar
