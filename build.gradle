@@ -4,21 +4,62 @@
 
 plugins {
     id("java")
+    id "maven"
+    id "maven-publish"
     id("fr.brouillard.oss.gradle.jgitver").version("0.9.1")
 }
 
-allprojects {
-    group = 'org.xhtmlrenderer'
-    repositories {
-        jcenter()
-    }
-
-    jgitver {
-        autoIncrementPatch(false)
-        strategy(fr.brouillard.oss.jgitver.Strategies.PATTERN)
-        versionPattern("\${meta.CURRENT_VERSION_MAJOR}.\${meta.CURRENT_VERSION_MINOR}.\${meta.COMMIT_DISTANCE}")
-        regexVersionTag("v(\\d+\\.\\d+(\\.0)?)")
-    }
-
+java {
+    sourceCompatibility = org.gradle.api.JavaVersion.VERSION_1_8
+    targetCompatibility = org.gradle.api.JavaVersion.VERSION_1_8
 }
 
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allJava
+    archiveClassifier = 'sources'
+}
+
+task sourceJar(type: Jar) {
+    from sourceSets.main.allJava
+}
+
+publishing {
+
+    repositories {
+        maven {
+            url = project.hasProperty('urlDest') ? project.getProperty('urlDest') : 'missing property'
+            authentication {
+                awsIm(AwsImAuthentication)
+            }
+        }
+    }
+
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId project.name
+            // version is set via plugin
+            from components.java
+            artifact sourcesJar
+        }
+    }
+}
+
+group = 'org.xhtmlrenderer'
+repositories {
+    jcenter()
+}
+
+jgitver {
+    autoIncrementPatch(false)
+    strategy(fr.brouillard.oss.jgitver.Strategies.PATTERN)
+    versionPattern("\${meta.CURRENT_VERSION_MAJOR}.\${meta.CURRENT_VERSION_MINOR}.\${meta.COMMIT_DISTANCE}")
+    regexVersionTag("v(\\d+\\.\\d+(\\.0)?)")
+}
+
+dependencies {
+    compile "com.github.librepdf:openpdf:1.3.11"
+    compile "org.slf4j:slf4j-api:1.7.30"
+
+    // test dependencies
+    testCompile 'junit:junit:4.12'
+}

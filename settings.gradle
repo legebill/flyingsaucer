@@ -6,6 +6,4 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'flying-saucer-parent'
-
-include 'flying-saucer-pdf'
+rootProject.name = 'flying-saucer-pdf'

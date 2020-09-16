@@ -2,30 +2,3 @@
  * Copyright (c) 2019 Practice Insight Pty Ltd. All Rights Reserved.
  */
 
-task sourcesJar(type: Jar) {
-    from sourceSets.main.allJava
-    archiveClassifier = 'sources'
-}
-
-publishing {
-
-    repositories {
-        maven {
-            url = project.hasProperty('urlDest') ? project.getProperty('urlDest') : 'missing property'
-            authentication {
-                awsIm(AwsImAuthentication)
-            }
-        }
-    }
-
-    publications {
-        mavenJava(MavenPublication) {
-            artifactId project.name
-            // version is set via plugin
-            from components.java
-            artifact sourcesJar
-        }
-    }
-}
-
-
