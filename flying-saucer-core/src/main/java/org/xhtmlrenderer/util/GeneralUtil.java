@@ -25,6 +25,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -33,6 +35,8 @@ import java.util.List;
  * @author Patrick Wright
  */
 public class GeneralUtil {
+
+    private static final Logger log = LoggerFactory.getLogger(GeneralUtil.class);
 
     /**
      * Used to format an Object's hashcode into a 0-padded 10 char String, e.g.
@@ -95,11 +99,11 @@ public class GeneralUtil {
         if (s == null || s.trim().equals("null")) {
             s = "{no ex. message}";
         }
-        System.out.println(s + ", " + ex.getClass());
+        log.info(s + ", " + ex.getClass());
         StackTraceElement[] stes = ex.getStackTrace();
         for (int i = 0; i < stes.length && i < 5; i++) {
             StackTraceElement ste = stes[i];
-            System.out.println("  " + ste.getClassName() + "." + ste.getMethodName() + "(ln " + ste.getLineNumber() + ")");
+            log.info("  " + ste.getClassName() + "." + ste.getMethodName() + "(ln " + ste.getLineNumber() + ")");
         }
     }
 
@@ -111,7 +115,7 @@ public class GeneralUtil {
      * <pre>
      * // called from Box.calcBorders(), line 639
      * String tback = GeneralUtil.trackBack(6);
-     * System.out.println(tback);
+     * log.info(tback);
      * </pre> produces
      * <pre>
      * Boxing.layoutChildren(ln 204)
@@ -281,7 +285,7 @@ public class GeneralUtil {
                 // ignore
             }
         }
-        System.out.println("Wrote file: " + f.getAbsolutePath());
+        log.info("Wrote file: " + f.getAbsolutePath());
     }
 
     /**

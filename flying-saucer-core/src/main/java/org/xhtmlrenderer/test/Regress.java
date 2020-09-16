@@ -18,6 +18,8 @@ package org.xhtmlrenderer.test;/*
  * }}}
  */
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xhtmlrenderer.layout.LayoutContext;
 import org.xhtmlrenderer.render.Box;
 import org.xhtmlrenderer.swing.BoxRenderer;
@@ -59,6 +61,9 @@ import java.util.List;
  * </pre>
  */
 public class Regress {
+
+    private static final Logger log = LoggerFactory.getLogger(Regress.class);
+
     public static final List EXTENSIONS = Arrays.asList(new String[]{"htm", "html", "xht", "xhtml", "xml",});
     public static final String RENDER_SFX = ".render.txt";
     public static final String LAYOUT_SFX = ".layout.txt";
@@ -85,10 +90,10 @@ public class Regress {
         final File outputDir = sourceDir;
         final int width = 1024;
 
-        System.out.println("Running regression against files in " + sourceDir);
+        log.info("Running regression against files in " + sourceDir);
         Regress regress = new Regress(sourceDir, outputDir, width);
         regress.snapshot();
-        System.out.println("Ran regressions against " + regress.getFileCount() + " files in source directory; " + regress.getFailedCount() + " failed to generate");
+        log.info("Ran regressions against " + regress.getFileCount() + " files in source directory; " + regress.getFailedCount() + " failed to generate");
     }
 
     /**

@@ -1,5 +1,7 @@
 package org.xhtmlrenderer.test;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
 import org.xhtmlrenderer.extend.ReplacedElement;
 import org.xhtmlrenderer.extend.UserAgentCallback;
@@ -22,6 +24,9 @@ import java.util.List;
  * @author patrick
  */
 public class SwingImageReplacer extends ElementReplacer {
+
+    private static final Logger log = LoggerFactory.getLogger(SwingImageReplacer.class);
+
     private final Map imageComponents;
 
     public SwingImageReplacer() {
@@ -45,12 +50,12 @@ public class SwingImageReplacer extends ElementReplacer {
     }
 
     public void clear(Element element) {
-        System.out.println("*** cleared image components for element " + element);
+        log.info("*** cleared image components for element " + element);
         imageComponents.remove(element);
     }
 
     public void reset() {
-        System.out.println("*** cleared image componentes");
+        log.info("*** cleared image componentes");
         imageComponents.clear();
     }
 
@@ -104,7 +109,7 @@ public class SwingImageReplacer extends ElementReplacer {
      *           (like a placeholder if the image can't be loaded).
      */
     protected void storeImageReplacedElement(Element e, ReplacedElement cc) {
-        System.out.println("\n*** Cached image for element");
+        log.info("\n*** Cached image for element");
         imageComponents.put(e, cc);
     }
 

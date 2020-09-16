@@ -25,6 +25,8 @@ import java.awt.Toolkit;
 import java.io.*;
 import java.text.DateFormat;
 import java.util.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -33,6 +35,9 @@ import java.util.*;
  * @author empty
  */
 public class Util {
+
+    private static final Logger log = LoggerFactory.getLogger(Util.class);
+
     /**
      * Description of the Field
      */
@@ -282,9 +287,9 @@ public class Util {
         }
         if (line) {
             if (pw == null) {
-                System.out.println(s);
+                log.info(s);
             } else {
-                //System.out.println(s);
+                //log.info(s);
                 pw.println(s);
                 //pw.println("<br>");
             }

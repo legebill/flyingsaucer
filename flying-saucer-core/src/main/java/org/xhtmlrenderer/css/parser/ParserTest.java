@@ -20,8 +20,13 @@
 package org.xhtmlrenderer.css.parser;
 
 import java.io.StringReader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ParserTest {
+
+    private static final Logger log = LoggerFactory.getLogger(ParserTest.class);
+
     public static void main(String[] args) throws Exception {
         String test = "div { background-image: url('something') }\n";
         StringBuffer longTest = new StringBuffer();
@@ -31,7 +36,7 @@ public class ParserTest {
         
         CSSErrorHandler errorHandler = new CSSErrorHandler() {
             public void error(String uri, String message) {
-                System.out.println(message);
+                log.info(message);
             }
         };
         
@@ -41,10 +46,10 @@ public class ParserTest {
             CSSParser p = new CSSParser(errorHandler);
             p.parseStylesheet(null, 0, new StringReader(longTest.toString()));
             long end = System.currentTimeMillis();
-            // System.out.println("Took " + (end-start) + " ms");
+            // log.info("Took " + (end-start) + " ms");
             total += (end-start);
         }
-        System.out.println("Average " + (total/10) + " ms");
+        log.info("Average " + (total/10) + " ms");
         
         total = 0;
         for (int i = 0; i < 10; i++) {
@@ -52,10 +57,10 @@ public class ParserTest {
             CSSParser p = new CSSParser(errorHandler);
             p.parseStylesheet(null, 0, new StringReader(longTest.toString()));
             long end = System.currentTimeMillis();
-            // System.out.println("Took " + (end-start) + " ms");
+            // log.info("Took " + (end-start) + " ms");
             total += (end-start);
         }
-        System.out.println("Average " + (total/10) + " ms");
+        log.info("Average " + (total/10) + " ms");
         
         CSSParser p = new CSSParser(errorHandler);
         
@@ -66,9 +71,9 @@ public class ParserTest {
                 p.parseStylesheet(null, 0, new StringReader(test));
             }
             long end = System.currentTimeMillis();
-            // System.out.println("Took " + (end-start) + " ms");
+            // log.info("Took " + (end-start) + " ms");
             total += (end-start);
         }
-        System.out.println("Average " + (total/10) + " ms");
+        log.info("Average " + (total/10) + " ms");
     }
 }

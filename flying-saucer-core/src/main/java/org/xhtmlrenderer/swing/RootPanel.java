@@ -337,7 +337,7 @@ public class RootPanel extends JPanel implements Scrollable, UserInterface, FSCa
             XRLog.layout(Level.INFO, "Layout took " + (end - start) + "ms");
 
             /*
-            System.out.println(root.dump(c, "", BlockBox.DUMP_LAYOUT));
+            log.info(root.dump(c, "", BlockBox.DUMP_LAYOUT));
             */
 
             // if there is a fixed child then we need to set opaque to false

@@ -22,6 +22,8 @@ package org.xhtmlrenderer.simple;
 import java.awt.image.BufferedImage;
 import java.io.*;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xhtmlrenderer.swing.Java2DRenderer;
 import org.xhtmlrenderer.util.FSImageWriter;
 
@@ -51,6 +53,9 @@ import org.xhtmlrenderer.util.FSImageWriter;
  * @author Patrick Wright
  */
 public class ImageRenderer {
+
+	private static final Logger log = LoggerFactory.getLogger(ImageRenderer.class);
+
 	public static final int DEFAULT_WIDTH = 1024;
 
 	/**
@@ -162,14 +167,14 @@ public class ImageRenderer {
 			if (f.exists()) {
 				String output = f.getAbsolutePath();
 				output = output.substring(0, output.lastIndexOf(".")) + ".png";
-				System.out.println("Saving image to " + output);
+				log.info("Saving image to " + output);
 				renderToImage(f, output, DEFAULT_WIDTH);
 			} else {
 				usage("File to render is not found: " + url);
 			}
 		} else {
 			File out = File.createTempFile("fs", ".png");
-			System.out.println("Saving image to " + out.getAbsolutePath());
+			log.info("Saving image to " + out.getAbsolutePath());
 			renderToImage(url, out.getAbsolutePath(), DEFAULT_WIDTH);
 		}
 	}

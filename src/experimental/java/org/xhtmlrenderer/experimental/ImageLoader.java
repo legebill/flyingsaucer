@@ -119,7 +119,7 @@ public class ImageLoader {
                     }
 
                     public void imageComplete(ImageReader imageReader) {
-                        System.out.println("   complete " + url);
+                        log.info("   complete " + url);
                     }
 
                     public void thumbnailStarted(ImageReader imageReader, int i, int i1) {
@@ -132,7 +132,7 @@ public class ImageLoader {
                     }
 
                     public void readAborted(ImageReader imageReader) {
-                        System.out.println("ABORT " + url);
+                        log.info("ABORT " + url);
                     }
                 };
                 reader.addIIOReadProgressListener(progressListener);

@@ -68,6 +68,9 @@ import org.xml.sax.InputSource;
  * @author Joshua Marinacci
  */
 public abstract class BasicPanel extends RootPanel implements FormSubmissionListener {
+
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(BasicPanel.class);
+
     private static final int PAGE_PAINTING_CLEARANCE_WIDTH = 10;
     private static final int PAGE_PAINTING_CLEARANCE_HEIGHT = 10;
 
@@ -86,8 +89,8 @@ public abstract class BasicPanel extends RootPanel implements FormSubmissionList
         mouseTracker = new MouseTracker(this);
         formSubmissionListener = new FormSubmissionListener() {
             public void submit(String query) {
-                System.out.println("Form Submitted!");
-                System.out.println("Data: " + query);
+                log.info("Form Submitted!");
+                log.info("Data: " + query);
 
                 JOptionPane.showMessageDialog(
                         null,

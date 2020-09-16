@@ -1,6 +1,8 @@
 // package PACKAGE;
 package org.xhtmlrenderer.tool;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xhtmlrenderer.test.DocumentDiffTest;
 
 import java.io.File;
@@ -10,6 +12,8 @@ import java.io.File;
  */
 public class Boxer {
 
+    private static final Logger log = LoggerFactory.getLogger(Boxer.class);
+
     private void run(String filen) {
         try {
             File file = new File(filen);
@@ -17,7 +21,7 @@ public class Boxer {
                 throw new IllegalArgumentException(filen + " not a file, or is a directory. Give me a single file name.");
             }
 
-            System.out.println(DocumentDiffTest.xhtmlToDiff(filen, 1024, 768));
+            log.info(DocumentDiffTest.xhtmlToDiff(filen, 1024, 768));
         } catch (Exception ex) {
             ex.printStackTrace();
         }

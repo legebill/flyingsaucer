@@ -16,17 +16,17 @@ import org.xhtmlrenderer.util.ImageUtil;
 public class Thumbnails {
 	public static void main(String[] args) {
 		if (args.length == 0) {
-			System.out.println("Enter directory name");
+			log.info("Enter directory name");
 			return;
 		}
 		String dirName = args[0];
 		File dir = new File(dirName);
 		if (!dir.exists()) {
-			System.out.println("Directory not found: " + dirName);
+			log.info("Directory not found: " + dirName);
 			return;
 		}
 		if (!dir.isDirectory()) {
-			System.out.println("Not a directory: " + dirName);
+			log.info("Not a directory: " + dirName);
 			return;
 		}
 		File[] pngs = dir.listFiles(new FileFilter() {
@@ -47,7 +47,7 @@ public class Thumbnails {
 				bi = ImageUtil.convertToBufferedImage(img, BufferedImage.TYPE_4BYTE_ABGR);
 				Graphics g = bi.getGraphics();
 				writer.write(bi, tpath);
-				System.out.println("Wrote: " + tpath);
+				log.info("Wrote: " + tpath);
 			} catch (IOException e) {
 				System.err.println("Can't read file, skipping: " + png.getName() + ", " + e.getMessage());
 				continue;

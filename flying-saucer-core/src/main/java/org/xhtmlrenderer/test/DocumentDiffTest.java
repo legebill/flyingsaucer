@@ -26,6 +26,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.logging.Level;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.xhtmlrenderer.render.Box;
 import org.xhtmlrenderer.simple.Graphics2DRenderer;
@@ -39,6 +41,9 @@ import org.xhtmlrenderer.util.XRLog;
  * @author empty
  */
 public class DocumentDiffTest {
+
+    private static final Logger log = LoggerFactory.getLogger(DocumentDiffTest.class);
+
     public static final int width = 500;
     public static final int height = 500;
 
@@ -218,7 +223,7 @@ public class DocumentDiffTest {
         if (new File(file).isDirectory()) {
             ddt.runTests(new File(file), width, height);
         } else {
-            System.out.println(xhtmlToDiff(file, 1280, 768));
+            log.info(xhtmlToDiff(file, 1280, 768));
         }
     }
 

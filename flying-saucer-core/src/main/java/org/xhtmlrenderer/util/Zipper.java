@@ -22,6 +22,8 @@ package org.xhtmlrenderer.util;
 import java.io.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Create a ZIP-format file from the contents of some directory. All files
@@ -33,6 +35,9 @@ import java.util.zip.ZipOutputStream;
  * and a compression format, GZIP is just a compression format).
  */
 public class Zipper {
+
+    private static final Logger log = LoggerFactory.getLogger(Zipper.class);
+
     private final File sourceDir;
     private final File outputFile;
 
@@ -52,7 +57,7 @@ public class Zipper {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Created zip file " + outputFile.getPath());
+        log.info("Created zip file " + outputFile.getPath());
     }
 
     public File zipDirectory() throws IOException {
